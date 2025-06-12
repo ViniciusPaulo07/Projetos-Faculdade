@@ -1,5 +1,8 @@
 public class CampeonatoDeFutebol {
 
+    /*Já aqui ele instancia os objetos TimeFutebol, estiloDeJogo e
+    o Campeonato, e realizando os jogos para no final mostrar os dados
+    de cada time instanciado.*/
     public static void main(String[] args) {
         TimeFutebol time1, time2, time3;
         Campeonato camp1;

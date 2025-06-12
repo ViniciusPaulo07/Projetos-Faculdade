@@ -2,6 +2,7 @@ public class Campeonato {
 
     private int jogosRealizados;
 
+    //Contrutor de Campeonato ele pega jogosRealizados já determina que o valor dele é 0.
     public Campeonato() {
         this.jogosRealizados = 0;
     }
@@ -30,6 +31,7 @@ public class Campeonato {
         }
     }
 
+    //Aqui modifica e mostra os dados dos jogos realizados.
     public void imprime() {
         System.out.println("Jogos realizados: " + jogosRealizados);
     }
