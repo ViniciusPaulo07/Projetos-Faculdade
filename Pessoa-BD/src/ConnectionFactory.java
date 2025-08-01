@@ -20,7 +20,8 @@ public class ConnectionFactory {
         }
     }
 
-    public Connection obtemConexao() throws SQLException {
+    // Metodo estatico para obter a conexao
+    public static Connection obtemConexao() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
