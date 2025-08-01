@@ -1,9 +1,4 @@
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.JOptionPane;
-
+// A classe Pessoa deve ser apenas um modelo de dados (POJO)
 public class Pessoa {
 
     private int codigo;
@@ -11,93 +6,58 @@ public class Pessoa {
     private String fone;
     private String email;
 
-    public Pessoa(){}
+    public Pessoa() {}
 
-    public Pessoa(int codigo,String nome,String fone,String email){
-        this.codigo=codigo;
-        this.nome=nome;
-        this.fone=fone;
-        this.email=email;
+    public Pessoa(String nome, String fone, String email) {
+        this.nome = nome;
+        this.fone = fone;
+        this.email = email;
     }
 
-    public int codigo(){
+    public Pessoa(int codigo, String nome, String fone, String email) {
+        this.codigo = codigo;
+        this.nome = nome;
+        this.fone = fone;
+        this.email = email;
+    }
+
+    // Getters
+    public int getCodigo() {
         return codigo;
     }
-    public String nome(){
+
+    public String getNome() {
         return nome;
     }
-    public String fone(){
+
+    public String getFone() {
         return fone;
     }
-    public String email(){
+
+    public String getEmail() {
         return email;
     }
-    public void setCodigo(int codigo){
-        this.codigo=codigo;
-    }
-    public void setNome(String nome){
-        this.nome=nome;
-    }
-    public void setFone(String fone){
-        this.fone=fone;
-    }
-    public void setEmail(String email){
-        this.email=email;
-    }
-    public void inserir() {
-        String sql = "INSERT INTO tb_pessoa(nome, fone, email) VALUES (?, ?, ?)";
-        try (Connection c = new ConnectionFactory().obtemConexao()) {
-            PreparedStatement ps = c.prepareStatement(sql);
-            ps.setString(1, nome);
-            ps.setString(2, fone);
-            ps.setString(3, email);
-            ps.execute();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao inserir: " + e.getMessage());
-        }
+
+    // Setters
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
-    public void atualizar() {
-        String sql = "UPDATE tb_pessoa SET nome = ?, fone = ?, email = ? WHERE codigo = ?";
-        try (Connection c = new ConnectionFactory().obtemConexao()) {
-            PreparedStatement ps = c.prepareStatement(sql);
-            ps.setString(1, nome);
-            ps.setString(2, fone);
-            ps.setString(3, email);
-            ps.setInt(4, codigo);
-            ps.execute();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar: " + e.getMessage());
-        }
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void apagar() {
-        String sql = "DELETE FROM tb_pessoa WHERE codigo = ?";
-        try (Connection c = new ConnectionFactory().obtemConexao()) {
-            PreparedStatement ps = c.prepareStatement(sql);
-            ps.setInt(1, codigo);
-            ps.execute();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao apagar: " + e.getMessage());
-        }
+    public void setFone(String fone) {
+        this.fone = fone;
     }
 
-    public void listar() {
-        String sql = "SELECT * FROM tb_pessoa";
-        StringBuilder resultado=new StringBuilder();
-        try (Connection c = new ConnectionFactory().obtemConexao()) {
-            PreparedStatement ps = c.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                resultado.append (String.format("Código: %d, Nome: %s, Fone: %s, Email: %s",
-                        rs.getInt("codigo"),
-                        rs.getString("nome"),
-                        rs.getString("fone"),
-                        rs.getString("email")));
-                JOptionPane.showMessageDialog(null, resultado.toString());
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao listar: " + e.getMessage());
-        }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    // Metodo toString para facilitar a visualização dos dados da pessoa
+    @Override
+    public String toString() {
+        return String.format("Código: %d, Nome: %s, Fone: %s, Email: %s", codigo, nome, fone, email);
     }
 }
